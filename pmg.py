@@ -79,19 +79,19 @@ st.markdown("<h1 style='color: white; font-size: 2em; text-align: left; margin-l
 
 # Filtrar os dados para 2022
 filtered_data = data[(data['PEDRA_2022'] == 'Topázio') & (data['PEDRA_2022'] != '#NULO!')]
-quantidade_topazio = filtered_data.shape[0]  # Conta o número de linhas
+quantidade_topazio = filtered_data.shape[0] 
 
 filtered2_data = data[(data['PEDRA_2022'] == 'Ametista') & (data['PEDRA_2022'] != '#NULO!')]
-quantidade_ametista = filtered2_data.shape[0]  # Conta o número de linhas
+quantidade_ametista = filtered2_data.shape[0] 
 
 filtered3_data = data[(data['PEDRA_2022'] == 'Ágata') & (data['PEDRA_2022'] != '#NULO!')]
-quantidade_agata = filtered3_data.shape[0]  # Conta o número de linhas
+quantidade_agata = filtered3_data.shape[0]  
 
 filtered4_data = data[(data['PEDRA_2022'] == 'Quartzo') & (data['PEDRA_2022'] != '#NULO!')]
-quantidade_quartzo = filtered4_data.shape[0]  # Conta o número de linhas
+quantidade_quartzo = filtered4_data.shape[0] 
 
 # Exibir a quantidade no Streamlit
-col1, col2, col3, col4 = st.columns(4)  # Cria quatro colunas para exibir os resultados
+col1, col2, col3, col4 = st.columns(4)  # Cria quatro colunas
 
 with col1:
     st.markdown(f"<h1 style='color: #2823bc; font-size: 1.8em;'>Topázio é: <span style='color: white;'>{quantidade_topazio}</span></h1>", unsafe_allow_html=True)
@@ -116,7 +116,7 @@ bins = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 years = ['2020', '2021', '2022']
 binned_data = {year: [] for year in years}
 
-# Preparar os dados para o gráfico
+# Preparar os dados
 for year in years:
     data['IPV_' + year] = pd.to_numeric(data['IPV_' + year], errors='coerce')
     binned_series = pd.cut(data['IPV_' + year], bins=bins, right=True)
@@ -146,8 +146,8 @@ fig.update_layout(
     barmode='group',
     bargap=0.1,  # Espaço entre as barras
     bargroupgap=0.1,  # Espaço entre as barras do grupo
-    plot_bgcolor='rgba(0,0,0,0)',  # Tornar o fundo transparente
-    paper_bgcolor='rgba(0,0,0,0)',  # Tornar o fundo do papel transparente
+    plot_bgcolor='rgba(0,0,0,0)',
+    paper_bgcolor='rgba(0,0,0,0)',  
     title_font=dict(size=30),  # Tamanho do Título
     xaxis_title_font=dict(size=20),  # Tamanho do Eixo x
     yaxis_title_font=dict(size=20),   # Tamanho do Eixo y
@@ -198,7 +198,8 @@ def plot_radar(data, title, color):
         polar=dict(
             radialaxis=dict(
                 visible=True,
-                range=[0, max(stats) + 1]
+                range=[0, max(stats) + 1],
+                tickfont=dict(color='black'),
             )
         ),
         showlegend=False
@@ -213,12 +214,12 @@ colors = {
     '2022': {'fillcolor': 'rgba(0, 128, 0, 0.25)', 'linecolor': 'green'}
 }
 
-# Criar subplots para os gráficos de radar
+# Subplots para os gráficos
 fig_2020 = plot_radar(instituicoes_2020_avg, 'Média das Pedras por Instituição em 2020', colors['2020'])
 fig_2021 = plot_radar(instituicoes_2021_avg, 'Média das Pedras por Instituição em 2021', colors['2021'])
 fig_2022 = plot_radar(instituicoes_2022_avg, 'Média das Pedras por Instituição em 2022', colors['2022'])
 
-# Exibir os gráficos no Streamlit
+# Exibir no Streamlit
 st.title("Gráficos de Radar - Média das Pedras por Instituição")
 
 col1, col2, col3 = st.columns(3)
@@ -242,11 +243,11 @@ data['INDE_2020'] = pd.to_numeric(data['INDE_2020'], errors='coerce')
 data['INDE_2021'] = pd.to_numeric(data['INDE_2021'], errors='coerce')
 data['INDE_2022'] = pd.to_numeric(data['INDE_2022'], errors='coerce')
 
-# Função para calcular métricas
+# Calcular métricas
 def calcular_metricas(df, ano_col, inde_col):
     num_alunos = df[ano_col].value_counts()
     media_inde = df.groupby(ano_col)[inde_col].mean()
-    retencao = df[ano_col].count() / df[ano_col].count()  # Retenção fictícia para exemplo
+    retencao = df[ano_col].count() / df[ano_col].count()
     return num_alunos, media_inde, retencao
 
 # Gerando os dados para 2020, 2021 e 2022
@@ -259,12 +260,12 @@ df_2020 = pd.DataFrame({'Instituição': num_alunos_2020.index, 'Número de Alun
 df_2021 = pd.DataFrame({'Instituição': num_alunos_2021.index, 'Número de Alunos': num_alunos_2021.values, 'Média do INDE': media_inde_2021.values, 'Retenção': retencao_2021})
 df_2022 = pd.DataFrame({'Instituição': num_alunos_2022.index, 'Número de Alunos': num_alunos_2022.values, 'Média do INDE': media_inde_2022.values, 'Retenção': retencao_2022})
 
-# Criar gráfico de bolhas para cada ano
+# Criar gráfico de bolhas
 fig_2020 = px.scatter(df_2020, x='Número de Alunos', y='Média do INDE', size='Retenção', color='Instituição', title='Análise das Instituições (2020)')
 fig_2021 = px.scatter(df_2021, x='Número de Alunos', y='Média do INDE', size='Retenção', color='Instituição', title='Análise das Instituições (2021)')
 fig_2022 = px.scatter(df_2022, x='Número de Alunos', y='Média do INDE', size='Retenção', color='Instituição', title='Análise das Instituições (2022)')
 
-# Exibir os gráficos no Streamlit
+# Exibir no Streamlit
 st.title("Análise das Instituições por Ano")
 col1, col2, col3 = st.columns(3)
 
@@ -277,16 +278,16 @@ with col2:
 with col3:
     st.plotly_chart(fig_2022, use_container_width=True)
 
-# Ajustar o tamanho dos gráficos
+# Ajustar o tamanho
 st.write('<style>div.row {flex-direction: row;}</style>', unsafe_allow_html=True)
 
 st.write("")
-                                                #EXPOTAÇÃO DE BASE
+                                                #EXPORTAÇÃO DE BASE
 st.write("")
 
-# Exibir um exemplo da base de dados
+# Exibir um exemplo da base
 st.title("Exemplo da Base de Dados")
-st.dataframe(data.head(5))  # Exibe uma amostra de 10 linhas da base de dados
+st.dataframe(data.head(5))  # Mostra 5 linhas da base
 
 # Exportar a base de dados
 st.markdown("### Exportar Base de Dados")
