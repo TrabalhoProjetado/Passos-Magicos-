@@ -32,7 +32,7 @@ st.markdown("<h1 style='font-size: 3em;'>ASSOCIAÇÃO PASSOS MÁGICOS</h1>", uns
 # Criar os botões e links
 
 botoes = ["Ir para o Dashboard", "Ir para o Github","Ir pro Colab"]
-links = ["https://app.powerbi.com/view?r=eyJrIjoiZmI5OTAwZWItZGFlMS00NTk3LWJlOWUtZjcwMWQzYzI1N2NkIiwidCI6IjdmZTFiYmJjLWIwMmUtNDFmMS04N2YyLTNhNWIzMTY1NzM0ZiJ9", "https://github.com/TrabalhoProjetado/Passos-Magicos-","https://colab.research.google.com/drive/1QbxXfVYMFBcRwM8aiVfIA3TauDL3jN1b?usp=sharing"] #ADICIONAR POWER BI E COLAB
+links = ["https://app.powerbi.com/view?r=eyJrIjoiMmNmZGQwNjQtYjY3Yi00N2IzLWJmY2ItZGQ5ZDViMGM1YmY5IiwidCI6IjdmZTFiYmJjLWIwMmUtNDFmMS04N2YyLTNhNWIzMTY1NzM0ZiJ9", "https://github.com/TrabalhoProjetado/Passos-Magicos-","https://colab.research.google.com/drive/1QbxXfVYMFBcRwM8aiVfIA3TauDL3jN1b?usp=sharing"] #ADICIONAR POWER BI E COLAB
 
 
 st.markdown(
@@ -94,16 +94,16 @@ quantidade_quartzo = filtered4_data.shape[0]
 col1, col2, col3, col4 = st.columns(4)  # Cria quatro colunas
 
 with col1:
-    st.markdown(f"<h1 style='color: #2823bc; font-size: 1.8em;'>Topázio é: <span style='color: white;'>{quantidade_topazio}</span></h1>", unsafe_allow_html=True)
+    st.markdown(f"<h1 style='color: #2823bc; font-size: 1.8em;'>Topázio é: {quantidade_topazio}</span></h1>", unsafe_allow_html=True)
 
 with col2:
-    st.markdown(f"<h1 style='color: #800080; font-size: 1.8em;'>Ametista é: <span style='color: white;'>{quantidade_ametista}</span></h1>", unsafe_allow_html=True)
+    st.markdown(f"<h1 style='color: #800080; font-size: 1.8em;'>Ametista é: {quantidade_ametista}</span></h1>", unsafe_allow_html=True)
 
-with col3:
-    st.markdown(f"<h1 style='color: #fc5500; font-size: 1.8em;'>Ágata é: <span style='color: white;'>{quantidade_agata}</span></h1>", unsafe_allow_html=True)
+with col3: 
+    st.markdown(f"<h1 style='color: #fc5500; font-size: 1.8em;'>Ágata é: {quantidade_agata}</span></h1>", unsafe_allow_html=True)
 
 with col4:
-    st.markdown(f"<h1 style='font-size: 1.8em;'>Quartzo é: <span style='color: white;'>{quantidade_quartzo}</span></h1>", unsafe_allow_html=True)
+    st.markdown(f"<h1 style='font-size: 1.8em;'>Quartzo é: {quantidade_quartzo}</span></h1>", unsafe_allow_html=True)
 
 #GRAFICOS
 
